@@ -10,9 +10,7 @@
 #include <wchar.h>
 #include <math.h>
 /*
-       CORREGIDO AVANCE 2. ME DIO OPORTUNIDAD DE CORREGIR EL AVANCE. 
-       POR FAVOR, PUEDE CHECAR LISTA. USÉ EL MISMO FORMATO QUE UTILIZÓ EN EL
-       EJEMPLO PARA EL AVANCE 2 PERO ESTÁ FALLANDO.
+       CORREGIDO AVANCE 2. ME DIO OPORTUNIDAD DE CORREGIR EL AVANCE.
 */
 using namespace std;
 
@@ -29,91 +27,91 @@ int main()
     int opcion;
     do
     {
-    printf("\t MENU DE OPCIONES:\n");
-    printf("1) Alta de calificacion.\n");
-    printf("2) Baja de calificacion.\n");
-    printf("3) Modificador de articulo.\n");
-    printf("4) Lista.\n"); //clasificacion, genero, consola
-    printf("5) Limpiar pantalla.\n");
-    printf("6) Salir.\n");
-    scanf_s("%d", &opcion);
-   
-    switch (opcion)
-    {
-    case 1: //alta
-        for (int i = 0; i < 3; i++)
+        printf("\t MENU DE OPCIONES:\n");
+        printf("1) Alta de calificacion.\n");
+        printf("2) Baja de calificacion.\n");
+        printf("3) Modificador de articulo.\n");
+        printf("4) Lista.\n"); //clasificacion, genero, consola
+        printf("5) Limpiar pantalla.\n");
+        printf("6) Salir.\n");
+        scanf_s("%d", &opcion);
+
+        switch (opcion)
         {
-            do {
-                printf("Ingrese numero del articulo.\n");
-                scanf_s("%d", &alta[i].numero); // numero art
-            } while (alta[i].numero == alta[i - 1].numero); //validacion
+        case 1: //alta
+            for (int i = 0; i < 3; i++)
+            {
+                do {
+                    printf("Ingrese numero del articulo.\n");
+                    scanf_s("%d", &alta[i].numero); // numero art
+                } while (alta[i].numero == alta[i - 1].numero); //validacion
 
-            while (getchar() != '\n');
-            printf("Ingrese nombre del articulo.\n");
-            getline(cin, alta[i].articulo); //nombre articulo
+                while (getchar() != '\n');
+                printf("Ingrese nombre del articulo.\n");
+                getline(cin, alta[i].articulo); //nombre articulo
 
-            printf("Ingrese fecha de lanzamiento del articulo.\n");
-            scanf_s("%d", &alta[i].anio); // año
+                printf("Ingrese fecha de lanzamiento del articulo.\n");
+                scanf_s("%d", &alta[i].anio); // año
 
-            while (getchar() != '\n');
-            printf("Ingrese genero.\n");
-            getline(cin, alta[i].genero); //genero
+                while (getchar() != '\n');
+                printf("Ingrese genero.\n");
+                getline(cin, alta[i].genero); //genero
 
-            printf("Ingrese clasificacion.\n");
-            getline(cin, alta[i].clasificacion); //clasificación
+                printf("Ingrese clasificacion.\n");
+                getline(cin, alta[i].clasificacion); //clasificación
 
-            printf("Ingrese consola.\n");
-            getline(cin, alta[i].consola); // nombre de la consola
+                printf("Ingrese consola.\n");
+                getline(cin, alta[i].consola); // nombre de la consola
 
-            printf("Ingrese caracteristicas.\n");
-            getline(cin, alta[i].caracteristicas); //caracteristicas del art
+                printf("Ingrese caracteristicas.\n");
+                getline(cin, alta[i].caracteristicas); //caracteristicas del art
 
-            printf("Ingrese descripcion del articulo.\n");
-            getline(cin, alta[i].descripcion); //descripcion del articulo
+                printf("Ingrese descripcion del articulo.\n");
+                getline(cin, alta[i].descripcion); //descripcion del articulo
 
-            printf("Ingrese precio unitario del articulo.\n");
-            scanf_s("%f", &alta[i].precio); //precio sin iva
+                printf("Ingrese precio unitario del articulo.\n");
+                scanf_s("%f", &alta[i].precio); //precio sin iva
 
-            printf("El IVA es:\n");
-            scanf_s("%f", &alta[i].iva); //esto es el iva .16 o 16%
+                printf("El IVA es:\n");
+                scanf_s("%f", &alta[i].iva); //esto es el iva .16 o 16%
 
-            alta[i].total = (alta[i].precio * alta[i].iva) + alta[i].precio;
+                alta[i].total = (alta[i].precio * alta[i].iva) + alta[i].precio;
 
-            printf("El precio total es: \n%f \n", alta[i].total);
+                printf("El precio total es: \n%f \n", alta[i].total);
+            }
+            break;
+
+        case 2: //baja 
+            break;
+
+        case 3: //modificador
+            break;
+
+        case 4: //lista
+            for (int i = 0; i < 3; i++)
+            {
+                printf("Registro %d.\n", i + 1);
+                printf("No. \n%d\n", alta[i].numero);
+                printf("Nombre: \n%s\n", alta[i].articulo.c_str());
+                printf("A%co: \n%d\n", 164, alta[i].anio);
+                printf("G%cnero: \n%s\n", 130, alta[i].genero.c_str());
+                printf("Clasificaci%cn: \n%s\n", 162, alta[i].clasificacion.c_str());
+                printf("Consola: \n%s\n", alta[i].consola.c_str());
+                printf("Caracter%csticas: \n%s\n", 161, alta[i].caracteristicas.c_str());
+                printf("Descripci%cn: \n%s\n", 162, alta[i].descripcion.c_str());
+                printf("Subtotal: \n%f\n", alta[i].precio);
+                printf("Total: \n%f\n", alta[i].total);
+            }
+            break;
+
+        case 5: //limpiar pantalla
+            system("cls");
+            return main();
+            break;
+
+        case 6: //salir
+            exit(1);
+            break;
         }
-        break;
-
-    case 2: //baja 
-        break;
-
-    case 3: //modificador
-        break;
-
-    case 4: //lista
-        for (int i = 0; i < 3; i++)
-    {
-        printf("Registro %d.\n", i + 1);
-        printf("No. \n%d\n", alta[i].numero);
-        printf("Nombre: \n%s\n", alta[i].articulo.c_str());
-        printf("A%co: \n%d\n", 164, alta[i].anio);
-        printf("G%cnero: \n%s\n", 130, alta[i].genero.c_str());
-        printf("Clasificaci%cn: \n%s\n", 162, alta[i].clasificacion.c_str());
-        printf("Consola: \n%s\n", alta[i].consola.c_str());
-        printf("Caracter%csticas: \n%s\n", 161, alta[i].caracteristicas.c_str());
-        printf("Descripci%cn: \n%s\n", 162, alta[i].descripcion.c_str());
-        printf("Subtotal: \n%f\n", alta[i].precio);
-        printf("Total: \n%f\n", alta[i].total);
-    }
-        break;
-
-    case 5: //limpiar pantalla
-        system("cls");
-        return main();
-        break;
-
-    case 6: //salir
-        exit(1);
-        break;
-    }
     } while (opcion != 6);
 }
