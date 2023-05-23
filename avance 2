@@ -10,7 +10,9 @@
 #include <wchar.h>
 #include <math.h>
 /*
-       CORREGIDO AVANCE 2. ME DIO OPORTUNIDAD DE CORREGIR EL AVANCE.
+       CORREGIDO AVANCE 2. ME DIO OPORTUNIDAD DE CORREGIR EL AVANCE. 
+       POR FAVOR, PUEDE CHECAR LISTA. USÉ EL MISMO FORMATO QUE UTILIZÓ EN EL
+       EJEMPLO PARA EL AVANCE 2 PERO ESTÁ FALLANDO.
 */
 using namespace std;
 
@@ -25,7 +27,8 @@ int main()
 {
     datos alta[3];
     int opcion;
-
+    do
+    {
     printf("\t MENU DE OPCIONES:\n");
     printf("1) Alta de calificacion.\n");
     printf("2) Baja de calificacion.\n");
@@ -34,7 +37,7 @@ int main()
     printf("5) Limpiar pantalla.\n");
     printf("6) Salir.\n");
     scanf_s("%d", &opcion);
-
+   
     switch (opcion)
     {
     case 1: //alta
@@ -43,7 +46,7 @@ int main()
             do {
                 printf("Ingrese numero del articulo.\n");
                 scanf_s("%d", &alta[i].numero); // numero art
-            } while (alta[i].numero == alta[i - 1].numero);
+            } while (alta[i].numero == alta[i - 1].numero); //validacion
 
             while (getchar() != '\n');
             printf("Ingrese nombre del articulo.\n");
@@ -76,9 +79,8 @@ int main()
 
             alta[i].total = (alta[i].precio * alta[i].iva) + alta[i].precio;
 
-            printf("El precio total es: \n%.2f \n", alta[i].total);
+            printf("El precio total es: \n%f \n", alta[i].total);
         }
-        return main();
         break;
 
     case 2: //baja 
@@ -100,7 +102,7 @@ int main()
         printf("Caracter%csticas: \n%s\n", 161, alta[i].caracteristicas.c_str());
         printf("Descripci%cn: \n%s\n", 162, alta[i].descripcion.c_str());
         printf("Subtotal: \n%f\n", alta[i].precio);
-        printf("Total: \n%.2f\n", alta[i].total);
+        printf("Total: \n%f\n", alta[i].total);
     }
         break;
 
@@ -112,6 +114,6 @@ int main()
     case 6: //salir
         exit(1);
         break;
-
     }
+    } while (opcion != 6);
 }
