@@ -4,20 +4,27 @@
 #include <string.h>
 #include <string>
 #include <wchar.h>
-
+#include <fstream>
+#include <stdlib.h>// funcione new y delete
+#include <vector>
+#include <wchar.h>
+#include <math.h>
+/*
+       CORREGIDO AVANCE 2. ME DIO OPORTUNIDAD DE CORREGIR EL AVANCE.
+*/
 using namespace std;
 
 struct datos
 {
-    char articulo[20], descripcion[50], caracteristicas[50], clasificacion[50], genero[50], consola[50];
+    string articulo, descripcion, caracteristicas, clasificacion, genero, consola;
     int numero, anio;
     float total, precio, iva;
 };
 
 int main()
 {
-    datos alta [3];
-    int decision, opcion, seleccion, elegirart;
+    datos alta[3];
+    int opcion;
 
     printf("\t MENU DE OPCIONES:\n");
     printf("1) Alta de calificacion.\n");
@@ -32,213 +39,69 @@ int main()
     {
     case 1: //alta
         for (int i = 0; i < 3; i++)
-        { 
-        printf("Ingrese numero del articulo.\n");
-        scanf_s("%d", &alta[i].numero ); // numero art
-
-        printf("Ingrese nombre del articulo.\n");
-        gets_s(alta[i].articulo); //nombre articulo
-
-        printf("Ingrese fecha de lanzamiento del articulo.\n"); 
-        scanf_s("%d", &alta[i].anio); // año
-
-        printf("Ingrese genero.\n");
-        gets_s(alta[i].genero); //genero
-
-        printf("Ingrese clasificacion.\n");
-        gets_s(alta[i].clasificacion); //clasificación
-
-        printf("Ingrese consola.\n");
-        gets_s(alta[i].consola); // nombre de la consola
-
-        printf("Ingrese caracteristicas.\n");
-        gets_s(alta[i].caracteristicas); //caracteristicas del art
-
-        printf("Ingrese descripcion del articulo.\n");
-        gets_s(alta[i].descripcion); //descripcion del articulo
-
-        printf("Ingrese precio unitario del articulo.\n");
-        scanf_s("%f", &alta[i].precio); //precio sin iva
-
-        printf("El IVA es:\n"); 
-        scanf_s("%f", &alta[i].iva); //esto es el iva .16 o 16%
-
-        alta[i].total = (alta[i].precio * alta[i].iva) + alta[i].precio;
-
-        printf("El precio total es: \n %f \n", &alta[i].total);
-        }
-
-        printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-        scanf_s("%d", &decision);
-        if (decision == 1)
         {
-            return main();
+            do {
+                printf("Ingrese numero del articulo.\n");
+                scanf_s("%d", &alta[i].numero); // numero art
+            } while (alta[i].numero == alta[i - 1].numero);
+
+            while (getchar() != '\n');
+            printf("Ingrese nombre del articulo.\n");
+            getline(cin, alta[i].articulo); //nombre articulo
+
+            printf("Ingrese fecha de lanzamiento del articulo.\n");
+            scanf_s("%d", &alta[i].anio); // año
+
+            while (getchar() != '\n');
+            printf("Ingrese genero.\n");
+            getline(cin, alta[i].genero); //genero
+
+            printf("Ingrese clasificacion.\n");
+            getline(cin, alta[i].clasificacion); //clasificación
+
+            printf("Ingrese consola.\n");
+            getline(cin, alta[i].consola); // nombre de la consola
+
+            printf("Ingrese caracteristicas.\n");
+            getline(cin, alta[i].caracteristicas); //caracteristicas del art
+
+            printf("Ingrese descripcion del articulo.\n");
+            getline(cin, alta[i].descripcion); //descripcion del articulo
+
+            printf("Ingrese precio unitario del articulo.\n");
+            scanf_s("%f", &alta[i].precio); //precio sin iva
+
+            printf("El IVA es:\n");
+            scanf_s("%f", &alta[i].iva); //esto es el iva .16 o 16%
+
+            alta[i].total = (alta[i].precio * alta[i].iva) + alta[i].precio;
+
+            printf("El precio total es: \n%.2f \n", alta[i].total);
         }
+        return main();
         break;
 
-    case 2: //baja
-        printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-        scanf_s("%d", &decision);
-        if (decision == 1)
-        {
-            return main();
-        }
+    case 2: //baja 
         break;
+
     case 3: //modificador
-        printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-        scanf_s("%d", &decision);
-        if (decision == 1)
-        {
-            return main();
-        }
         break;
 
     case 4: //lista
-        printf("LISTA DE LA TIENDA:\n");
-        printf("1.- %d", &alta[1].articulo);
-        printf("2.- %d", &alta[2].articulo);
-        printf("3.- %d", &alta[3].articulo);
-
-        printf("Seleccione el numero del articulo para ver informacion adicional.");
-        scanf_s("%d", &elegirart);
-
-        switch(elegirart)
-        {
-        case 1: 
-        printf("Seleccione un numero para ver filtro:\n");
-        printf("1) Buscar por clasificacion.\n");
-        printf("2) Buscar por genero.\n");
-        printf("3) Buscar por consola.\n");
-        scanf_s("%d", &seleccion);
-
-        switch (seleccion)
-        {
-        case 1: //clasificacion
-                printf("\tCLASIFICACION\n");
-                printf("Pertenece a la clasificación:\n%s\n", &alta[elegirart].clasificacion);
-
-                printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-                scanf_s("%d", &decision);
-                if (decision == 1)
-                {
-                    return main();
-                }
-
-                break;
-
-        case 2: //genero
-            printf("\tGENERO\n");
-            printf("Pertenece al genero:\n%s\n", &alta[elegirart].genero);
-
-            printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-            scanf_s("%d", &decision);
-            if (decision == 1)
-            {
-                return main();
-            }
-
-            break;
-
-        case 3: //consola
-            printf("\tCONSOLA\n");
-            printf("Pertenece a la consola:\n%s\n", &alta[elegirart].consola);
-
-            printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-            scanf_s("%d", &decision);
-            if (decision == 1)
-            {
-                return main();
-            }
-
-            break;
-        }
-         
-        case 2:
-            printf("Seleccione un numero para ver filtro:\n");
-            printf("1) Buscar por clasificacion.\n");
-            printf("2) Buscar por genero.\n");
-            printf("3) Buscar por consola.\n");
-            scanf_s("%d", &seleccion);
-
-            switch (seleccion)
-            {
-            case 1: //clasificacion
-                printf("\tCLASIFICACION\n");
-                printf("Pertenece a la clasificación:\n%s\n", &alta[elegirart].clasificacion);
-
-                printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-                scanf_s("%d", &decision);
-                if (decision == 1)
-                {
-                    return main();
-                }
-
-                break;
-
-            case 2: //genero
-                printf("\tGENERO\n");
-                printf("Pertenece al genero:\n%s\n", &alta[elegirart].genero);
-
-                printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-                scanf_s("%d", &decision);
-                if (decision == 1)
-                {
-                    return main();
-                }
-
-                break;
-
-            case 3: //consola
-                printf("\tCONSOLA\n");
-                printf("Pertenece a la consola:\n%s\n", &alta[elegirart].consola);
-
-                printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-                scanf_s("%d", &decision);
-                if (decision == 1)
-                {
-                    return main();
-                }
-
-                break;
-            }
-
-        case 3:
-            printf("Seleccione un numero para ver filtro:\n");
-            printf("1) Buscar por clasificacion.\n");
-            printf("2) Buscar por genero.\n");
-            printf("3) Buscar por consola.\n");
-            scanf_s("%d", &seleccion);
-
-            switch (seleccion)
-            {
-            case 1: //clasificacion
-                printf("\tCLASIFICACION\n");
-                printf("Pertenece a la clasificación:\n%s\n", &alta[elegirart].clasificacion);
-
-                break;
-
-            case 2: //genero
-                printf("\tGENERO\n");
-                printf("Pertenece al genero:\n%s\n", &alta[elegirart].genero);
-
-                break;
-
-            case 3: //consola
-                printf("\tCONSOLA\n");
-                printf("Pertenece a la consola:\n%s\n", &alta[elegirart].consola);
-
-                break;
-            }
-
-        }
-
-        printf("Si desea ingresar otra opcion presione 1, de lo contrario presione 2.\n");
-        scanf_s("%d", &decision);
-        if (decision == 1)
-        {
-            return main();
-        }
-
+        for (int i = 0; i < 3; i++)
+    {
+        printf("Registro %d.\n", i + 1);
+        printf("No. \n%d\n", alta[i].numero);
+        printf("Nombre: \n%s\n", alta[i].articulo.c_str());
+        printf("A%co: \n%d\n", 164, alta[i].anio);
+        printf("G%cnero: \n%s\n", 130, alta[i].genero.c_str());
+        printf("Clasificaci%cn: \n%s\n", 162, alta[i].clasificacion.c_str());
+        printf("Consola: \n%s\n", alta[i].consola.c_str());
+        printf("Caracter%csticas: \n%s\n", 161, alta[i].caracteristicas.c_str());
+        printf("Descripci%cn: \n%s\n", 162, alta[i].descripcion.c_str());
+        printf("Subtotal: \n%f\n", alta[i].precio);
+        printf("Total: \n%.2f\n", alta[i].total);
+    }
         break;
 
     case 5: //limpiar pantalla
